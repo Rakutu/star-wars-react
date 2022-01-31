@@ -1,0 +1,29 @@
+.wrapper {
+    position: absolute;
+    top: calc((100%  / 2) - 40px);
+    left: calc((100%  / 2) - 40px);
+}
+
+.loadWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background-color: #FFE81F;
+}
+
+.loadIcon {
+    margin: 0;
+    margin: auto;
+    height: 40px;
+    width: 40px;
+    animation: spin 1.5s linear infinite;
+}
+
+
+@keyframes spin {
+    0% {transform: rotate(0deg)}
+    100% {transform: rotate(360deg)}
+  }

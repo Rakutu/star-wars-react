@@ -1,0 +1,22 @@
+.error-message__wrapper {
+    margin: auto;
+    max-width: 300px;
+    padding-top: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: #FFE81F;
+}
+
+.error-message__icon {
+    width: 150px;
+    height: 150px;
+}
+
+.error-message__title {
+    text-align: center;
+}
+
+.error-message__text {
+    text-align: center;
+}
