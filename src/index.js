@@ -1,4 +1,4 @@
 import ReactDOM from 'react-dom';
-import RandomPlanet from './components/RandomPlanet/RandomPlanet';
+import App from './components/App'
 
-ReactDOM.render(<RandomPlanet />, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'))

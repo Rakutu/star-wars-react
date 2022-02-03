@@ -1,6 +1,7 @@
 
 export default class SwapiService {
   	#apiBase = 'https://swapi.dev/api';
+	#imageBase = `https://starwars-visualguide.com/assets/img/`;
 
   	async getResource(url) {
     	const res = await fetch(`${this.#apiBase}${url}`);
@@ -12,43 +13,54 @@ export default class SwapiService {
     	return await res.json();
   	}
 
-	async getAllPeople() {
+	getPersonImage = ({id}) => {
+		return `${this.#imageBase}characters/${id}.jpg`;
+	}
+
+	getPlanetsImage = ({id}) => {
+		return `${this.#imageBase}planets/${id}.jpg`;
+	}
+
+	getStarshipImage = ({id}) => {
+		return `${this.#imageBase}starships/${id}.jpg`;
+	}
+
+	getAllPeople = async () => {
 		const res = await this.getResource('/people/');
 		return res.results.map(this.#transformPerson);
 	}
 
-	async getPerson(id) {
+	getPerson = async (id) => {
 		const person = await this.getResource(`/people/${id}`);
 		return this.#transformPerson(person);
 	}
 
-	async getAllPlanets() {
+	getAllPlanets = async () => {
 		const res = await this.getResource('/planets/');
 		return res.results.map(this.#transformPlanet);
 	}
 
-	async getPlanet(id) {
+	getPlanet = async (id) => {
 		const planet = await this.getResource(`/planets/${id}`)
 		return this.#transformPlanet(planet);
 	}
 
-	async getAllStarships() {
+	getAllStarships = async () => {
 		const res = await this.getResource('/starships/');
 		return res.results.map(this.#transformStarship);
 	}
 
-	async getStarship(id) {
+	getStarship = async (id) => {
 		const starship = await this.getResource(`/starships/${id}`);
 		return this.#transformStarship(starship);
 	}
 
 	#getId(string) {
 		const regExp = /[\d]+/g;
-		console.log(string.match(regExp))
 		return string.match(regExp);
 	}
 
-	#transformPlanet(planet) {
+	#transformPlanet = (planet) => {
 		return {
 			id: this.#getId(planet.url),
 			name: planet.name,
@@ -58,13 +70,13 @@ export default class SwapiService {
 		}
 	}
 
-	#transformStarship(starship) {
+	#transformStarship = (starship) => {
 		return {
 			id: this.#getId(starship.url),
 			name: starship.name,
 			model: starship.model,
 			manufacturer: starship.manufacturer,
-			costInCredits: starship.costInCredits,
+			costInCredits: starship.cost_in_credits,
 			length: starship.length,
 			crew: starship.crew,
 			passengers: starship.passengers,
@@ -72,13 +84,13 @@ export default class SwapiService {
 		}
 	}
 
-	#transformPerson(person) {
+	#transformPerson = (person) => {
 		return {
-			id: this.#getId(person.url),
+			id: this.#getId(person.url)[0],
 			name: person.name,
 			gender: person.gender,
-			birthYear: person.birthYear,
-			eyeColor: person.eyeColor,
+			birthYear: person.birth_year,
+			eyeColor: person.eye_color,
 		}
 	}
 }

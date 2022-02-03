@@ -1,0 +1,8 @@
+.items-list__list {
+    flex-basis: 50%;
+    margin-right: 30px;
+}
+
+.list-group-item {
+    cursor: pointer;
+}

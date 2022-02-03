@@ -14,10 +14,13 @@ export default class RandomPlanet extends Component {
         error: false,
     };
 
-    constructor() {
-        super();
-        console.log(this.swapiService)
+    componentDidMount() {
         this.updatePlanet()
+        this.interval = setInterval(this.updatePlanet, 3000)
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval)
     }
 
     onPlanetLoaded = (planet) => {
@@ -34,8 +37,8 @@ export default class RandomPlanet extends Component {
         })
     }
 
-    updatePlanet() {
-        const id = Math.floor(Math.random() * 60 + 2);
+    updatePlanet = () => {
+        const id = Math.floor(Math.random() * 18 + 2);
         this.swapiService.getPlanet(id)
                         .then(this.onPlanetLoaded)
                         .catch(this.onError)
@@ -51,7 +54,7 @@ export default class RandomPlanet extends Component {
         const content = hasData ? <PlanetView planet={planet} /> : null;
 
         return(
-            <div className="random-planet jumbotron rounded">
+            <div className="random-planet   ">
                 {spiner}
                 {errorMessage}
                 {content}
@@ -64,25 +67,25 @@ const PlanetView = ({ planet }) => {
     const { id, name, population, rotationPeriod, diameter } = planet;
 
     return (
-        <>
-            <img src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt={`${name} planet`} />
+        <article className='card flex-row random-planet__container'>
+            <img className='random-planet__image' src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt={`${name} planet`} />
             <div className="">
-                <h4 className="title">{name}</h4>
+                <h4 className="random-planet__title">{name}</h4>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
-                        <span className="term">Population</span>
+                        <span className="random-planet__term">Population:</span>
                         <span>{population}</span>
                     </li>
                     <li className="list-group-item">
-                        <span className="term">Rotation period</span>
+                        <span className="random-planet__term">Rotation period:</span>
                         <span>{rotationPeriod}</span>
                     </li>
                     <li className="list-group-item">
-                        <span className="term">Diametr</span>
+                        <span className="random-planet__term">Diametr:</span>
                         <span>{diameter}</span>
                     </li>
                 </ul>
             </div>
-        </>
+        </article>
     )
 }
