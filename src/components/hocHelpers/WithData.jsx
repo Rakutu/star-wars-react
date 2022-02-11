@@ -1,26 +1,40 @@
 import React, {Component} from 'react';
 import Spiner from '../Spiner';
+import ErrorMessage from '../ErrorMessage';
 
-const withData = (View, getData) => {
+const withData = (View) => {
     return class extends Component {
 
         state = {
-            itemList: null
+            itemList: null,
+            hasError: false,
+            load: true,
         }
 
         componentDidMount() {
-            getData()
+            this.update()
+        }
+
+        update() {
+            this.props.getData()
                 .then(itemList => {
                     this.setState({
-                        itemList
+                        itemList,
+                        load: false,
                     })
                 })
+                .catch(() => this.setState({
+                    load: false,
+                    hasError: true,
+                }))
         }
 
         render() {
             
-            const  { itemList } = this.state;
-            if (!itemList) return <Spiner/>
+            const  { itemList, load, hasError } = this.state;
+
+            if (load) return <Spiner/>
+            if (hasError) return <ErrorMessage />
 
             return <View {...this.props} itemList={itemList} />
         }
