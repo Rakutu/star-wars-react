@@ -1,26 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './starshipPage.css';
 import ErrorBoundry from '../../ErrorBoundry';
-import { StarshipList, StarshipDetails} from '../../SWComponents';
+import { StarshipList } from '../../SWComponents';
 
-export default class PeoplePage extends Component {
-    state = {
-        selectStarship: null,
-    }
+const StarshipPage = () => {
 
-    onStarshipSelected = (id) => {
-        this.setState({
-            selectStarship: id
-        })
-    }
-
-    render() {                       
-        const { selectStarship } = this.state;
-        return(
-            <ErrorBoundry>
-                <StarshipList onItemSelected={this.onStarshipSelected} />
-                <StarshipDetails itemId={selectStarship} />
-            </ErrorBoundry> 
-        )
-    }
+    return(
+        <ErrorBoundry>
+            <StarshipList path={'starships'} />
+        </ErrorBoundry> 
+    )
 }
+
+export default StarshipPage

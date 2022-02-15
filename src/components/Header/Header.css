@@ -1,0 +1,32 @@
+.header{
+    margin: 20px 0 20px;
+}
+
+.header__list {
+    list-style: none;
+    align-items: center;
+}
+
+.header__item {
+    margin-right: 30px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: #303030;
+}
+
+.header__link {
+    font-size: 24px;
+    text-decoration: none;
+    color: yellow;
+}
+
+.header__title-link {
+    font-size: 36px;
+    text-decoration: none;
+    font-weight: bold;
+    color: yellow;
+}
+
+.active {
+    color: #00bc8c;
+}
