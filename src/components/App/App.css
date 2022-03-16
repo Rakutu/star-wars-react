@@ -1,4 +1,6 @@
 .container__items {
+    position: relative;
+    min-height: 300px;
     display: grid;
     gap: 30px;
     grid-template-columns: 1fr 1fr;
